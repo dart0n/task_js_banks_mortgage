@@ -6,8 +6,14 @@ const cors = require('cors')
 
 const app = express()
 
+const corsOptions = {
+  origin: process.env.HEROKU_APP_URL,
+  optionsSuccessStatus: 200,
+}
+
 app.use(express.json({ extended: true }))
-app.use(cors())
+app.use(cors(corsOptions))
+app.options('*', cors())
 
 app.use('/api/banks', require('./routers/banks.routes'))
 
