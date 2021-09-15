@@ -7,7 +7,7 @@ import Banks from './Banks/Banks'
 import MortgageCalculator from './MortgageCalculator'
 
 function App() {
-  const [banks, setBanks] = useState([])
+  const [banks, setBanks] = useState(null)
 
   useEffect(() => {
     async function fetchData() {
@@ -15,7 +15,7 @@ function App() {
       setBanks(result.data.data)
     }
 
-    fetchData()
+    if (!banks) fetchData()
   }, [banks])
 
   const createBank = async (fields) => {

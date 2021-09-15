@@ -12,7 +12,7 @@ const corsOptions = {
 }
 
 app.use(express.json({ extended: true }))
-app.use(cors(corsOptions))
+app.use(cors(process.env.NODE_ENV === 'production' ? corsOptions : { origin: true }))
 app.options('*', cors())
 
 app.use('/api/banks', require('./routers/banks.routes'))
